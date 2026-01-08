@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup - Workstation</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <main>
+        <div class="setup-container">
+            <h2>Welcome to Workstation</h2>
+            <p>Please sit back and set up your profile.</p>
+            <form action="/setup" method="post">
+                <div class="form-group">
+                    <label for="username">What should we call you?</label>
+                    <input type="text" id="username" name="username" required placeholder="Enter your name">
+                </div>
+                <button type="submit" class="btn">Start Workstation</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workstation</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">Workstation</div>
+        <div class="user-profile">
+            <span class="user-name">{{ username }}</span>
+            <div class="user-icon">{{ username[0] | upper }}</div>
+        </div>
+    </header>
+
+    <main>
+        <h1>Welcome, {{ username }}</h1>
+        <p class="subtitle">to your workstation, where productivity meets simplicity.</p>
+
+        <div class="action-buttons">
+            <a href="#" class="btn">Dashboard</a>
+            <a href="#" class="btn">Workspaces</a>
+        </div>
+    </main>
+</body>
+
+</html>
