@@ -1,16 +1,5 @@
 :root {
-    /* Light Mode Variables */
-    --bg-color: #f4f4f9;
-    --text-color: #333333;
-    --card-bg: #ffffff;
-    --primary-color: #007bff;
-    --primary-hover: #0056b3;
-    --header-bg: #ffffff;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Dark Mode Variables via Attribute */
-[data-theme="dark"] {
+    /* Dark Mode Variables (Default and Only) */
     --bg-color: #1e1e2f;
     --text-color: #ffffff;
     --card-bg: #2b2b40;
@@ -18,38 +7,28 @@
     --primary-hover: #0069d9;
     --header-bg: #2b2b40;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    /* Deep Dark Gradient */
+    --bg-gradient:
+        radial-gradient(at 0% 0%, hsla(253, 16%, 10%, 1) 0, transparent 50%),
+        radial-gradient(at 50% 50%, hsla(225, 39%, 15%, 1) 0, transparent 50%),
+        radial-gradient(at 100% 100%, hsla(339, 49%, 15%, 1) 0, transparent 50%);
 }
 
-/* Theme Toggle Button */
-.theme-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text-color);
-    font-size: 1.2rem;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-    margin-right: 15px;
-    /* Spacing between toggle and username */
-}
 
-.theme-btn:hover {
-    transform: scale(1.1);
-}
 
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--bg-color);
+    background-image: var(--bg-gradient);
+    background-attachment: fixed;
     color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
+
 
 header {
     display: flex;
