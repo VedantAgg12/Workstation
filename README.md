@@ -6,6 +6,10 @@ Workstation is a personal productivity web application designed to organize task
 
 -   **Personalized Landing Page**: Welcomes the user by name.
 -   **Theme Support**: Automatic Light and Dark mode based on system preferences.
+-   **Modular Architecture**: Dynamically managed modules categorized into:
+    -   **General Modules**: Common tools like Clock, Settings, and Customization.
+    -   **Application Modules**: Specialized functional units like Story Studio.
+-   **Workspaces**: Create and manage distinct workspaces (e.g., "Writing", "Coding") with customized module visibility to focus your workflow.
 -   **Data Privacy**: All data is stored locally in JSON files within the `data/` directory.
 -   **FastAPI Backend**: High-performance Python framework.
 
@@ -25,7 +29,7 @@ Workstation is a personal productivity web application designed to organize task
 
 1.  **Start the Server**:
     ```bash
-    ./venv/Scripts/python -m uvicorn main:app.py --reload
+    ./venv/Scripts/python -m uvicorn main:app --reload
     ```
 2.  **Access the App**:
     Open [http://localhost:8000](http://localhost:8000) in your browser.
@@ -36,6 +40,8 @@ Workstation is a personal productivity web application designed to organize task
 
 -   `main.py`: Application entry point.
 -   `database.py`: Handles file-based database operations.
--   `templates/`: HTML templates.
+-   `templates/`: HTML templates (Dashboard, Workspaces, etc.).
 -   `static/`: CSS and JavaScript files.
 -   `data/`: Stores user configuration and database files (ignored by Git).
+    -   `modules.json`: Configuration for available modules.
+    -   `workspaces.json`: Persistence for user-created workspaces.

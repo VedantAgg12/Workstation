@@ -37,6 +37,29 @@ header {
     padding: 20px 40px;
     background-color: var(--header-bg);
     box-shadow: var(--shadow);
+    z-index: 10;
+    position: relative;
+}
+
+header.dashboard-header {
+    padding: 15px 30px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.hamburger-menu {
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--text-color);
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 header .logo {
@@ -128,7 +151,7 @@ p.subtitle {
     font-weight: bold;
 }
 
-.form-group input {
+.form-group input:not([type="checkbox"]) {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -143,4 +166,359 @@ p.subtitle {
 .form-group input:focus {
     outline: none;
     border-color: var(--primary-color);
+}
+
+/* Workspaces Page */
+.workspaces-main {
+    padding: 20px 40px;
+    align-items: stretch;
+    /* Override default center */
+    justify-content: flex-start;
+    /* Fix vertical alignment */
+    text-align: left;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.workspaces-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.workspace-card {
+    background-color: var(--card-bg);
+    height: 150px;
+    flex: 1 1 300px;
+    /* Grow, Shrink, Basis */
+    max-width: 100%;
+    /* Be wary of single line requirement, will check */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    transition: transform 0.2s;
+}
+
+.workspace-card:hover {
+    transform: translateY(-5px);
+}
+
+.workspace-card h3 {
+    margin-top: 0;
+}
+
+.workspace-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.workspace-meta a {
+    color: var(--primary-color);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    /* Prevent body scroll if needed, though usually on body */
+}
+
+.modal-content {
+    background-color: var(--bg-color);
+    /* Match theme */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 30px;
+    border-radius: 12px;
+    width: 500px;
+    max-width: 90%;
+    max-height: 90vh;
+    /* Fit within viewport */
+    overflow-y: auto;
+    /* Enable scrolling if content is too long */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid #444;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #444;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    /* Ensure vertical center alignment */
+    gap: 10px;
+    cursor: pointer;
+    line-height: 1.2;
+    /* Better line height for alignment */
+    padding: 2px 0;
+    /* Touch target */
+}
+
+/* Dynamic Sources */
+.sources-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.source-input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-remove-source {
+    background: transparent;
+    border: none;
+    color: #ff4d4d;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.sources-links {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.full-width {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Dashboard Styles */
+.dashboard-content {
+    align-items: flex-start;
+    padding: 40px;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.module-section {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.module-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.module-grid {
+    display: grid;
+    /* auto-fit allows items to expand to fill the row */
+    /* minmax(250px, 1fr) ensures responsive wrapping */
+    /* On very large screens, this might allow >5, but fits the "expand" requirement best */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+/* Enforce max 5 columns logic via min-width breakpoint if strictly needed, 
+   but minmax(300px, 1fr) covers most standard resolutions up to 1500px+ content width. */
+@media (min-width: 1800px) {
+    .module-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.module-card {
+    background-color: var(--card-bg);
+    background: linear-gradient(145deg, var(--card-bg), #232336);
+    height: 150px;
+    /* Keeping user's preference */
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.module-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary-color);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.module-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+    border-color: rgba(77, 163, 255, 0.3);
+}
+
+.module-card:hover::before {
+    opacity: 1;
+}
+
+.module-card h3 {
+    margin: 15px 0 10px;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.module-card p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+.module-icon {
+    font-size: 40px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    background: rgba(77, 163, 255, 0.1);
+    padding: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.module-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Drawer Styles */
+.drawer {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: var(--card-bg);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    transition: left 0.3s ease-in-out;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.drawer.open {
+    left: 0;
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.close-btn {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.drawer-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.drawer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background-color: var(--primary-color);
+    color: white;
 }

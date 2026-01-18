@@ -28,10 +28,43 @@ async def root(request: Request):
         "username": config.get("username", "User")
     })
 
+@app.get("/dashboard")
+async def dashboard(request: Request):
+    config = database.get_config()
+    username = config.get("username", "User") if config else "User"
+    modules = database.get_modules()
+    return templates.TemplateResponse("dashboard.html", {
+        "request": request,
+        "username": username,
+        "modules": modules
+    })
+
 @app.post("/setup")
 async def setup(request: Request, username: str = Form(...)):
     database.create_config(username)
     return RedirectResponse(url="/", status_code=303)
+
+@app.get("/workspaces")
+async def workspaces(request: Request):
+    config = database.get_config()
+    if not config:
+        return RedirectResponse(url="/")
+    
+    workspaces_data = database.get_workspaces()
+    return templates.TemplateResponse("workspaces.html", {
+        "request": request, 
+        "username": config.get("username", "User"),
+        "workspaces": workspaces_data
+    })
+
+@app.get("/api/modules")
+async def get_modules():
+    return database.get_modules()
+
+@app.post("/api/workspaces")
+async def add_workspace(request: Request):
+    data = await request.json()
+    return database.add_workspace(data)
 
 # Hack to support 'uvicorn main:app.py' (uvicorn treats dots as attribute access)
 app.py = app
